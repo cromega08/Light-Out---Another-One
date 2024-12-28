@@ -21,36 +21,33 @@
  * E-mail: cr.jrg08@gmail.com
  */
 
-package cromega.studio.light.out.utils.interfaces
+package cromega.studio.light.out.ui.navigation
 
-import androidx.compose.runtime.Composable
-import cromega.studio.light.out.utils.enums.Platforms
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 
-interface Functionalities
-{
-    val platform: Platforms
+class NavigationController(
+    initialScreen: Screen
+) {
+    private val currentScreenState: MutableState<Screen> = mutableStateOf(initialScreen)
+    var currentScreen: Screen
+        get() = currentScreenState.value
+        set(value) { currentScreenState.value = value }
 
-    val isPortrait: Boolean
-        @Composable
-        get()
+    private var lastScreen: Screen? = null
+
+    fun navigateTo(screen: Screen)
+    {
+        lastScreen = currentScreen
+        currentScreen = screen
+    }
+
+    fun navigateBack()
+    {
+        if (lastScreen != null)
         {
-            val dimensions: Pair<Int, Int> =
-                if (platform == Platforms.ANDROID) getScreenDimensions()
-                else getWindowDimensions()
-
-            return dimensions.second > dimensions.first
+            currentScreen = lastScreen!!
+            lastScreen = null
         }
-
-    @Composable
-    fun getPlatformAccordingDimensions(): Pair<Int, Int> =
-        when (platform)
-        {
-            Platforms.ANDROID -> getScreenDimensions()
-            Platforms.DESKTOP -> getWindowDimensions()
-        }
-
-    fun getScreenDimensions(): Pair<Int, Int>
-
-    @Composable
-    fun getWindowDimensions(): Pair<Int, Int>
+    }
 }

@@ -21,36 +21,16 @@
  * E-mail: cr.jrg08@gmail.com
  */
 
-package cromega.studio.light.out.utils.interfaces
+package cromega.studio.light.out.ui.screens.generic
 
-import androidx.compose.runtime.Composable
-import cromega.studio.light.out.utils.enums.Platforms
+import androidx.lifecycle.ViewModel
+import cromega.studio.light.out.getFunctionalities
+import cromega.studio.light.out.ui.navigation.NavigationController
+import cromega.studio.light.out.utils.interfaces.Functionalities
 
-interface Functionalities
+abstract class FeatureViewModel(
+    protected val navigationController: NavigationController
+) : ViewModel()
 {
-    val platform: Platforms
-
-    val isPortrait: Boolean
-        @Composable
-        get()
-        {
-            val dimensions: Pair<Int, Int> =
-                if (platform == Platforms.ANDROID) getScreenDimensions()
-                else getWindowDimensions()
-
-            return dimensions.second > dimensions.first
-        }
-
-    @Composable
-    fun getPlatformAccordingDimensions(): Pair<Int, Int> =
-        when (platform)
-        {
-            Platforms.ANDROID -> getScreenDimensions()
-            Platforms.DESKTOP -> getWindowDimensions()
-        }
-
-    fun getScreenDimensions(): Pair<Int, Int>
-
-    @Composable
-    fun getWindowDimensions(): Pair<Int, Int>
+    val functionalities: Functionalities = getFunctionalities()
 }

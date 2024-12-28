@@ -21,36 +21,27 @@
  * E-mail: cr.jrg08@gmail.com
  */
 
-package cromega.studio.light.out.utils.interfaces
+package cromega.studio.light.out.ui.screens.home
 
-import androidx.compose.runtime.Composable
-import cromega.studio.light.out.utils.enums.Platforms
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import cromega.studio.light.out.ui.navigation.NavigationController
+import cromega.studio.light.out.ui.screens.generic.FeatureViewModel
 
-interface Functionalities
+class HomeViewModel(
+    navigationController: NavigationController
+) : FeatureViewModel(navigationController = navigationController)
 {
-    val platform: Platforms
+    val boardSizes: List<Int> = (3..6).toList()
 
-    val isPortrait: Boolean
-        @Composable
-        get()
-        {
-            val dimensions: Pair<Int, Int> =
-                if (platform == Platforms.ANDROID) getScreenDimensions()
-                else getWindowDimensions()
+    private val lightsOnState: SnapshotStateList<Boolean> =
+        mutableStateListOf( *(boardSizes.map { false }.toTypedArray()) )
+    val lightsOn: List<Boolean>
+        get() = lightsOnState
 
-            return dimensions.second > dimensions.first
-        }
+    fun setLight(index: Int, on: Boolean = true)
+    {
+        lightsOnState[index] = on
+    }
 
-    @Composable
-    fun getPlatformAccordingDimensions(): Pair<Int, Int> =
-        when (platform)
-        {
-            Platforms.ANDROID -> getScreenDimensions()
-            Platforms.DESKTOP -> getWindowDimensions()
-        }
-
-    fun getScreenDimensions(): Pair<Int, Int>
-
-    @Composable
-    fun getWindowDimensions(): Pair<Int, Int>
 }

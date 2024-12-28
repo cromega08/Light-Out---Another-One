@@ -21,36 +21,27 @@
  * E-mail: cr.jrg08@gmail.com
  */
 
-package cromega.studio.light.out.utils.interfaces
+package cromega.studio.light.out
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import cromega.studio.light.out.utils.enums.Platforms
+import androidx.compose.runtime.remember
+import cromega.studio.light.out.ui.navigation.NavigationController
+import cromega.studio.light.out.ui.navigation.Screen
+import cromega.studio.light.out.ui.screens.home.HomeScreen
+import cromega.studio.light.out.ui.screens.home.HomeViewModel
 
-interface Functionalities
-{
-    val platform: Platforms
+@Composable
+fun App() {
+    MaterialTheme {
+        val navigationController: NavigationController = remember { NavigationController(Screen.Home) }
 
-    val isPortrait: Boolean
-        @Composable
-        get()
+        val home: HomeScreen = HomeScreen(viewModel = HomeViewModel(navigationController = navigationController))
+
+        when(navigationController.currentScreen)
         {
-            val dimensions: Pair<Int, Int> =
-                if (platform == Platforms.ANDROID) getScreenDimensions()
-                else getWindowDimensions()
-
-            return dimensions.second > dimensions.first
+            Screen.Home -> home.Screen()
+            Screen.Game -> TODO()
         }
-
-    @Composable
-    fun getPlatformAccordingDimensions(): Pair<Int, Int> =
-        when (platform)
-        {
-            Platforms.ANDROID -> getScreenDimensions()
-            Platforms.DESKTOP -> getWindowDimensions()
-        }
-
-    fun getScreenDimensions(): Pair<Int, Int>
-
-    @Composable
-    fun getWindowDimensions(): Pair<Int, Int>
+    }
 }

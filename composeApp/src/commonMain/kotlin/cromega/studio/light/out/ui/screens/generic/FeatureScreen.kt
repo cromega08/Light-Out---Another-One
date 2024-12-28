@@ -21,36 +21,30 @@
  * E-mail: cr.jrg08@gmail.com
  */
 
-package cromega.studio.light.out.utils.interfaces
+package cromega.studio.light.out.ui.screens.generic
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import cromega.studio.light.out.utils.enums.Platforms
+import java.awt.Dimension
 
-interface Functionalities
-{
-    val platform: Platforms
-
-    val isPortrait: Boolean
-        @Composable
-        get()
-        {
-            val dimensions: Pair<Int, Int> =
-                if (platform == Platforms.ANDROID) getScreenDimensions()
-                else getWindowDimensions()
-
-            return dimensions.second > dimensions.first
-        }
+abstract class FeatureScreen<VM : FeatureViewModel>(
+    protected val viewModel: VM
+) {
+    @Composable
+    open fun Screen() =
+        Scaffold(
+            topBar = { Header() },
+            content = { paddingValues -> Body(paddingValues = paddingValues) },
+            bottomBar = {}
+        )
 
     @Composable
-    fun getPlatformAccordingDimensions(): Pair<Int, Int> =
-        when (platform)
-        {
-            Platforms.ANDROID -> getScreenDimensions()
-            Platforms.DESKTOP -> getWindowDimensions()
-        }
-
-    fun getScreenDimensions(): Pair<Int, Int>
+    abstract fun Header()
 
     @Composable
-    fun getWindowDimensions(): Pair<Int, Int>
+    abstract fun Body(paddingValues: PaddingValues)
+
+    @Composable
+    abstract fun Footer()
 }

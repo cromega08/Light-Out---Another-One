@@ -21,36 +21,10 @@
  * E-mail: cr.jrg08@gmail.com
  */
 
-package cromega.studio.light.out.utils.interfaces
+package cromega.studio.light.out.ui.navigation
 
-import androidx.compose.runtime.Composable
-import cromega.studio.light.out.utils.enums.Platforms
-
-interface Functionalities
+sealed interface Screen
 {
-    val platform: Platforms
-
-    val isPortrait: Boolean
-        @Composable
-        get()
-        {
-            val dimensions: Pair<Int, Int> =
-                if (platform == Platforms.ANDROID) getScreenDimensions()
-                else getWindowDimensions()
-
-            return dimensions.second > dimensions.first
-        }
-
-    @Composable
-    fun getPlatformAccordingDimensions(): Pair<Int, Int> =
-        when (platform)
-        {
-            Platforms.ANDROID -> getScreenDimensions()
-            Platforms.DESKTOP -> getWindowDimensions()
-        }
-
-    fun getScreenDimensions(): Pair<Int, Int>
-
-    @Composable
-    fun getWindowDimensions(): Pair<Int, Int>
+    data object Home : Screen
+    data object Game : Screen
 }

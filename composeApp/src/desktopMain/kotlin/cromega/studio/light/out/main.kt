@@ -23,15 +23,40 @@
 
 package cromega.studio.light.out
 
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPlacement
+import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
-import cromega.studio.light.out.ui.views.main.App
+import androidx.compose.ui.window.rememberWindowState
+import lightout_anotherone.composeapp.generated.resources.Res
+import lightout_anotherone.composeapp.generated.resources.app_name
+import lightout_anotherone.composeapp.generated.resources.compose_multiplatform
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import java.awt.Dimension
 
 fun main() = application {
+    val windowState = rememberWindowState()
+
+    windowState.position = WindowPosition(Alignment.Center)
+    windowState.placement = WindowPlacement.Fullscreen
+    windowState.isMinimized = false
+
     Window(
         onCloseRequest = ::exitApplication,
-        title = "Light Out - Another One",
+        state = windowState,
+        title = stringResource(resource = Res.string.app_name),
+        icon = painterResource(Res.drawable.compose_multiplatform)
     ) {
+        val screenDimensions: Pair<Int, Int> = getFunctionalities().getScreenDimensions()
+
+        window.minimumSize =
+            Dimension(
+                (screenDimensions.first / 2) + 50,
+                (screenDimensions.second / 2) + 50
+            )
+
         App()
     }
 }
