@@ -26,6 +26,7 @@ package cromega.studio.light.out.ui.screens.home
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import cromega.studio.light.out.ui.navigation.NavigationController
+import cromega.studio.light.out.ui.navigation.Screen
 import cromega.studio.light.out.ui.screens.generic.FeatureViewModel
 
 class HomeViewModel(
@@ -44,4 +45,6 @@ class HomeViewModel(
         lightsOnState[index] = on
     }
 
+    fun startGame(selectedBoardSize: Int) =
+        navigationController.navigateTo(Screen.Game, mapOf("boardSize" to selectedBoardSize))
 }

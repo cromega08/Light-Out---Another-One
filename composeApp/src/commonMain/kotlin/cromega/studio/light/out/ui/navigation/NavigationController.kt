@@ -36,10 +36,15 @@ class NavigationController(
 
     private var lastScreen: Screen? = null
 
-    fun navigateTo(screen: Screen)
+    var currentArguments: Map<String, Any> = mapOf()
+    private var lastArguments: Map<String, Any> = mapOf()
+
+    fun navigateTo(screen: Screen, arguments: Map<String, Any> = mapOf())
     {
         lastScreen = currentScreen
         currentScreen = screen
+        lastArguments = currentArguments
+        currentArguments = arguments
     }
 
     fun navigateBack()
@@ -48,6 +53,8 @@ class NavigationController(
         {
             currentScreen = lastScreen!!
             lastScreen = null
+            currentArguments = lastArguments
+            lastArguments = mapOf()
         }
     }
 }

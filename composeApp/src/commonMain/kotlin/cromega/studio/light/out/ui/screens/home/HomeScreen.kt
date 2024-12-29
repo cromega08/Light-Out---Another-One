@@ -27,7 +27,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -49,12 +48,8 @@ class HomeScreen(
     {
         val items = viewModel.boardSizes.map { "$it x $it" }
 
-        CenteredBox(
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .background(color = Color.Black)
-        ) {
+        CenteredBox(modifier = Modifier.fillMaxSize())
+        {
             NSquareGrid(isPortrait = viewModel.functionalities.isPortrait)
             {
                 items(items)
@@ -67,6 +62,7 @@ class HomeScreen(
                         onClick =
                             {
                                 viewModel.setLight(index = index, on = !lightOn)
+                                viewModel.startGame(viewModel.boardSizes[index])
                             },
                         content = { LightText(text = item, lightOn = !lightOn) }
                     )

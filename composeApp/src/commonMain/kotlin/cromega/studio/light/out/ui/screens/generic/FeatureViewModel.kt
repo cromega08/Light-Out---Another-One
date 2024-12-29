@@ -32,5 +32,6 @@ abstract class FeatureViewModel(
     protected val navigationController: NavigationController
 ) : ViewModel()
 {
+    val arguments: Map<String, Any> = navigationController.currentArguments
     val functionalities: Functionalities = getFunctionalities()
 }

@@ -28,6 +28,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import cromega.studio.light.out.ui.navigation.NavigationController
 import cromega.studio.light.out.ui.navigation.Screen
+import cromega.studio.light.out.ui.screens.game.GameScreen
+import cromega.studio.light.out.ui.screens.game.GameViewModel
 import cromega.studio.light.out.ui.screens.home.HomeScreen
 import cromega.studio.light.out.ui.screens.home.HomeViewModel
 
@@ -36,12 +38,19 @@ fun App() {
     MaterialTheme {
         val navigationController: NavigationController = remember { NavigationController(Screen.Home) }
 
-        val home: HomeScreen = HomeScreen(viewModel = HomeViewModel(navigationController = navigationController))
-
         when(navigationController.currentScreen)
         {
-            Screen.Home -> home.Screen()
-            Screen.Game -> TODO()
+            Screen.Home ->
+                {
+                    val home: HomeScreen = HomeScreen(viewModel = HomeViewModel(navigationController = navigationController))
+                    home.Screen()
+                }
+            Screen.Game ->
+                {
+                    val game: GameScreen = GameScreen(viewModel = GameViewModel(navigationController = navigationController))
+
+                    game.Screen()
+                }
         }
     }
 }

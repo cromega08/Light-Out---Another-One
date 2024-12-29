@@ -24,8 +24,10 @@
 package cromega.studio.light.out.ui.screens.generic
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import java.awt.Dimension
 
 abstract class FeatureScreen<VM : FeatureViewModel>(
@@ -36,7 +38,8 @@ abstract class FeatureScreen<VM : FeatureViewModel>(
         Scaffold(
             topBar = { Header() },
             content = { paddingValues -> Body(paddingValues = paddingValues) },
-            bottomBar = {}
+            bottomBar = { Footer() },
+            backgroundColor = Color.Black
         )
 
     @Composable
