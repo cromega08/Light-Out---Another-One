@@ -159,7 +159,7 @@ class GameScreen(
             backgroundColor = Color.White,
             contentColor = Color.Black,
             shape = RoundedCornerShape(10.dp),
-            onDismissRequest = { viewModel.closeVictoryDialog() },
+            onDismissRequest = {},
             onConfirm =
                 {
                     viewModel.closeVictoryDialog()
