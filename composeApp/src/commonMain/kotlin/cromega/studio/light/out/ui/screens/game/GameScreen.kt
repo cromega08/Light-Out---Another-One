@@ -1,7 +1,29 @@
+/**
+ *     <Light Out - Another One | Another implementation of the popular game of "Light Out".>
+ *     Copyright (C) <2024 - 2025>  <Cromega>
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU Affero General Public License as published
+ *     by the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU Affero General Public License for more details.
+ *
+ *     You should have received a copy of the GNU Affero General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Author: Cromega
+ * E-mail: cr.jrg08@gmail.com
+ */
+
 package cromega.studio.light.out.ui.screens.game
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +34,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,9 +45,6 @@ import cromega.studio.light.out.ui.components.LightBox
 import cromega.studio.light.out.ui.components.LightText
 import cromega.studio.light.out.ui.components.NSquareGrid
 import cromega.studio.light.out.ui.screens.generic.FeatureScreen
-import lightout_anotherone.composeapp.generated.resources.Res
-import lightout_anotherone.composeapp.generated.resources.movements
-import org.jetbrains.compose.resources.stringResource
 
 class GameScreen(
     viewModel: GameViewModel
