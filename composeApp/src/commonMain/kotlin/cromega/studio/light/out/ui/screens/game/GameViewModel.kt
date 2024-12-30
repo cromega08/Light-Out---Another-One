@@ -48,9 +48,9 @@ class GameViewModel(
         get() = lightsOn.flatten().toTypedArray()
 
     private val movesState: MutableState<Int> = mutableStateOf(0)
-    var moves: Int = 0
+    var moves: Int
         get() = movesState.value
-        private set
+        private set(value) { movesState.value = value }
 
     private val alertBackDialogOpenState: MutableState<Boolean> = mutableStateOf(false)
     var alertBackDialogOpen: Boolean
@@ -177,6 +177,8 @@ class GameViewModel(
                 lightsOnState[y][x] = Random.nextBoolean()
             }
         }
+
+        moves = 0
     }
 
     fun openAlertBackDialog()
