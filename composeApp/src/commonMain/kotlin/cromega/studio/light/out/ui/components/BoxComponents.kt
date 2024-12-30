@@ -17,7 +17,7 @@
  */
 
 /**
- * Autor: Cromega
+ * Author: Cromega
  * E-mail: cr.jrg08@gmail.com
  */
 
