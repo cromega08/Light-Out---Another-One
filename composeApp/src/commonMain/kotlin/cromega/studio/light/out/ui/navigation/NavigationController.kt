@@ -37,6 +37,7 @@ class NavigationController(
     private var lastScreen: Screen? = null
 
     var currentArguments: Map<String, Any> = mapOf()
+        private set
     private var lastArguments: Map<String, Any> = mapOf()
 
     fun navigateTo(screen: Screen, arguments: Map<String, Any> = mapOf())
