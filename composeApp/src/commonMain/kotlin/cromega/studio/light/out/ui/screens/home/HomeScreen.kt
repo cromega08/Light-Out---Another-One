@@ -26,7 +26,9 @@ package cromega.studio.light.out.ui.screens.home
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,6 +37,10 @@ import cromega.studio.light.out.ui.components.LightBox
 import cromega.studio.light.out.ui.components.LightText
 import cromega.studio.light.out.ui.components.NSquareGrid
 import cromega.studio.light.out.ui.screens.generic.FeatureScreen
+import lightout_anotherone.composeapp.generated.resources.Res
+import lightout_anotherone.composeapp.generated.resources.icon
+import org.jetbrains.compose.resources.painterResource
+import javax.swing.Icon
 
 class HomeScreen(
     viewModel: HomeViewModel

@@ -31,7 +31,7 @@ import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import lightout_anotherone.composeapp.generated.resources.Res
 import lightout_anotherone.composeapp.generated.resources.app_name
-import lightout_anotherone.composeapp.generated.resources.compose_multiplatform
+import lightout_anotherone.composeapp.generated.resources.icon
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import java.awt.Dimension
@@ -47,7 +47,7 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         state = windowState,
         title = stringResource(resource = Res.string.app_name),
-        icon = painterResource(Res.drawable.compose_multiplatform)
+        icon = painterResource(Res.drawable.icon)
     ) {
         val screenDimensions: Pair<Int, Int> = getFunctionalities().getScreenDimensions()
 
