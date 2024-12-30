@@ -1,6 +1,5 @@
 package cromega.studio.light.out.ui.screens.game
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,8 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.Composable
@@ -22,8 +21,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cromega.studio.light.out.ui.components.CenteredBox
 import cromega.studio.light.out.ui.components.LightBox
+import cromega.studio.light.out.ui.components.LightText
 import cromega.studio.light.out.ui.components.NSquareGrid
 import cromega.studio.light.out.ui.screens.generic.FeatureScreen
+import lightout_anotherone.composeapp.generated.resources.Res
+import lightout_anotherone.composeapp.generated.resources.movements
+import org.jetbrains.compose.resources.stringResource
 
 class GameScreen(
     viewModel: GameViewModel
@@ -41,8 +44,10 @@ class GameScreen(
         ) {
             IconButton(
                 onClick = { viewModel.back() },
-                content = { Icon(Icons.Default.ArrowBack, contentDescription = "", tint = Color.White) }
+                content = { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "", tint = Color.White) }
             )
+
+            LightText(text = "${viewModel.moves}")
 
             IconButton(
                 onClick = { viewModel.regenerateBoard() },
@@ -67,7 +72,11 @@ class GameScreen(
 
                     LightBox(
                         lightOn = lightOn,
-                        onClick = { viewModel.onClickLight(coordinates = coordinates) }
+                        onClick =
+                            {
+                                viewModel.onClickLight(coordinates = coordinates)
+                                viewModel.increaseMoves()
+                            }
                     )
                 }
             }

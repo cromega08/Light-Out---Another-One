@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Light Out - Another One</string>
     <string name="custom">Custom</string>
+    <string name="movements">Movements</string>
 </resources>

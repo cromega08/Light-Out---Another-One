@@ -1,9 +1,14 @@
 package cromega.studio.light.out.ui.screens.game
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import cromega.studio.light.out.ui.navigation.NavigationController
 import cromega.studio.light.out.ui.screens.generic.FeatureViewModel
+import java.util.LinkedList
+import java.util.Queue
+import kotlin.properties.Delegates
 import kotlin.random.Random
 
 class GameViewModel(
@@ -11,23 +16,32 @@ class GameViewModel(
 ) : FeatureViewModel(navigationController = navigationController)
 {
     val boardSize: Int = arguments["boardSize"] as Int
+
     private val lightsOnState: Array<SnapshotStateList<Boolean>> =
         Array(boardSize)
         {
             mutableStateListOf( *(Array(boardSize) { Random.nextBoolean() }) )
         }
-
     val lightsOn: Array<Array<Boolean>>
         get() = lightsOnState.map { it.toTypedArray() }.toTypedArray()
-
     val flattenLightsOn: Array<Boolean>
         get() = lightsOn.flatten().toTypedArray()
+
+    private val movesState: MutableState<Int> = mutableStateOf(0)
+    var moves: Int = 0
+        get() = movesState.value
+        private set
+
+    fun increaseMoves()
+    {
+        movesState.value += 1
+    }
 
     fun findCoordinatesOfLight(flattenIndex: Int): Pair<Int, Int>
     {
         var position: Int = -1
         var y: Int = -1
-        var x: Int = -1
+        var x: Int
 
         for (element in lightsOn)
         {
@@ -119,7 +133,7 @@ class GameViewModel(
     fun regenerateBoard()
     {
         var y: Int = -1
-        var x: Int = -1
+        var x: Int
 
         for (row in lightsOnState)
         {
