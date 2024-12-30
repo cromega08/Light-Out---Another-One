@@ -40,7 +40,7 @@ fun main() = application {
     val windowState = rememberWindowState()
 
     windowState.position = WindowPosition(Alignment.Center)
-    windowState.placement = WindowPlacement.Fullscreen
+    windowState.placement = WindowPlacement.Maximized
     windowState.isMinimized = false
 
     Window(
