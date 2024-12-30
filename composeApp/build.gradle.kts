@@ -79,9 +79,19 @@ compose.desktop {
         mainClass = "cromega.studio.light.out.MainKt"
 
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "cromega.studio.light.out"
+            targetFormats(TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe, TargetFormat.AppImage)
+            packageName = "Light Out - Another One"
             packageVersion = "1.0.0"
+
+            windows {
+                shortcut = true
+                iconFile = file("src/commonMain/composeResources/drawable/icon.ico")
+            }
+
+            linux {
+                shortcut = true
+                iconFile = file("src/commonMain/composeResources/drawable/icon.ico")
+            }
         }
     }
 }
