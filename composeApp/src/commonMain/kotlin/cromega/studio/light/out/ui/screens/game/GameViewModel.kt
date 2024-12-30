@@ -52,6 +52,16 @@ class GameViewModel(
         get() = movesState.value
         private set
 
+    private val alertBackDialogOpenState: MutableState<Boolean> = mutableStateOf(false)
+    var alertBackDialogOpen: Boolean
+        get() = alertBackDialogOpenState.value
+        private set(value) { alertBackDialogOpenState.value = value }
+
+    private val victoryDialogOpenState: MutableState<Boolean> = mutableStateOf(false)
+    var victoryDialogOpen: Boolean
+        get() = victoryDialogOpenState.value
+        private set(value) { victoryDialogOpenState.value = value }
+
     fun increaseMoves()
     {
         movesState.value += 1
@@ -91,7 +101,7 @@ class GameViewModel(
 
         if (validateVictory())
         {
-            back()
+            openVictoryDialog()
         }
     }
 
@@ -167,6 +177,26 @@ class GameViewModel(
                 lightsOnState[y][x] = Random.nextBoolean()
             }
         }
+    }
+
+    fun openAlertBackDialog()
+    {
+        alertBackDialogOpen = true
+    }
+
+    fun closeAlertBackDialog()
+    {
+        alertBackDialogOpen = false
+    }
+
+    fun openVictoryDialog()
+    {
+        victoryDialogOpen = true
+    }
+
+    fun closeVictoryDialog()
+    {
+        victoryDialogOpen = false
     }
 
     fun back() = navigationController.navigateBack()

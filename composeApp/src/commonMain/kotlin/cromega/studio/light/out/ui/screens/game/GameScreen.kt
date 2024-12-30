@@ -26,21 +26,32 @@ package cromega.studio.light.out.ui.screens.game
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cromega.studio.light.out.ui.components.CenteredBox
+import cromega.studio.light.out.ui.components.CustomAlertDialog
 import cromega.studio.light.out.ui.components.LightBox
 import cromega.studio.light.out.ui.components.LightText
 import cromega.studio.light.out.ui.components.NSquareGrid
@@ -50,6 +61,21 @@ class GameScreen(
     viewModel: GameViewModel
 ) : FeatureScreen<GameViewModel>(viewModel = viewModel)
 {
+    @Composable
+    override fun Screen() =
+        Scaffold(
+            topBar = { Header() },
+            content =
+                { paddingValues ->
+                    Body(paddingValues = paddingValues)
+
+                    if (viewModel.alertBackDialogOpen) AlertBackDialog()
+                    if (viewModel.victoryDialogOpen) VictoryDialog()
+                },
+            bottomBar = { Footer() },
+            backgroundColor = Color.Black
+        )
+
     @Composable
     override fun Header() =
         Row(
@@ -61,15 +87,15 @@ class GameScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
-                onClick = { viewModel.back() },
-                content = { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "", tint = Color.White) }
+                onClick = { viewModel.openAlertBackDialog() },
+                content = { Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "", tint = Color.White) }
             )
 
             LightText(text = "${viewModel.moves}")
 
             IconButton(
                 onClick = { viewModel.regenerateBoard() },
-                content = { Icon(Icons.Default.Refresh, contentDescription = "", tint = Color.White) }
+                content = { Icon(imageVector = Icons.Default.Refresh, contentDescription = "", tint = Color.White) }
             )
         }
 
@@ -102,4 +128,61 @@ class GameScreen(
 
     @Composable
     override fun Footer() {}
+
+    @Composable
+    private fun AlertBackDialog() =
+        CustomAlertDialog(
+            onDismissRequest = { viewModel.closeAlertBackDialog() },
+            onConfirm =
+                {
+                    viewModel.closeAlertBackDialog()
+                    viewModel.back()
+                },
+            confirmIcon = Icons.Default.Done,
+            confirmIconDescription = "",
+            onCancel = { viewModel.closeAlertBackDialog() },
+            cancelIcon = Icons.Default.Close,
+            cancelIconDescription = "",
+            description =
+            {
+                Icon(
+                    modifier = Modifier.scale(1.5f),
+                    imageVector = Icons.Filled.Home,
+                    contentDescription = ""
+                )
+            }
+        )
+
+    @Composable
+    private fun VictoryDialog() =
+        CustomAlertDialog(
+            backgroundColor = Color.White,
+            contentColor = Color.Black,
+            shape = RoundedCornerShape(10.dp),
+            onDismissRequest = { viewModel.closeVictoryDialog() },
+            onConfirm =
+                {
+                    viewModel.closeVictoryDialog()
+                    viewModel.regenerateBoard()
+                },
+            confirmIcon = Icons.Default.Refresh,
+            confirmIconDescription = "",
+            onCancel = { viewModel.back() },
+            cancelIcon = Icons.AutoMirrored.Filled.ArrowBack,
+            cancelIconDescription = "",
+            description =
+                {
+                    Icon(
+                        imageVector = Icons.Filled.Star,
+                        contentDescription = ""
+                    )
+
+                    Spacer(modifier = Modifier.height(1.dp).width(5.dp))
+
+                    LightText(
+                        lightOn = false,
+                        text = viewModel.moves.toString()
+                    )
+                }
+        )
 }
