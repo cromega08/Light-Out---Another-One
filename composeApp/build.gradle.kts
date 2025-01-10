@@ -85,12 +85,12 @@ compose.desktop {
 
             windows {
                 shortcut = true
-                iconFile = file("src/commonMain/composeResources/drawable/icon.ico")
+                iconFile = file("src/commonMain/composeResources/drawable/icon_installer.ico")
             }
 
             linux {
                 shortcut = true
-                iconFile = file("src/commonMain/composeResources/drawable/icon.ico")
+                iconFile = file("src/commonMain/composeResources/drawable/icon_installer.ico")
             }
         }
     }
