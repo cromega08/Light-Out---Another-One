@@ -6,11 +6,15 @@
 
 ## Installation
 
-**Light Out - Another One** can be installed through the [published releases](https://github.com/cromega08/Light-Out---Another-One/releases):
+**Light Out - Another One** can be installed in 2 different platforms:
 
-- **Android**: For **Android** platform, download the _.apk_ file on your device and follow the steps for installing.
+- **Android**: For **Android** platform you need to obtain the _.apk_ file on your device and follow the steps for installing. You can obtain the file through:
+  - [Uptodown](https://light-out-another-one.uptodown.com/android).
+  - [Github Releases](https://github.com/cromega08/Light-Out---Another-One/releases/tag/android).
 
-- **Desktop (Windows)**: For **Desktop (Windows)** download one of the available installers, and install it as any other **Windows** application (_double click_ and follow the process).
+- **Desktop (Windows)**: For **Desktop (Windows)** download one of the available installers, and execute it (_double click_ and follow the process). You can obtain the file through:
+  - [Uptodown](https://light-out-another-one.uptodown.com/windows) (Only can download the _.msi_ variant).
+  - [Github Releases](https://github.com/cromega08/Light-Out---Another-One/releases/tag/windows) (Can find the _.exe_ and _.msi_ variants).
 
 ## Tech Stack
 
